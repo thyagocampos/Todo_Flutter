@@ -21,13 +21,15 @@ class App extends StatelessWidget {
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
+  // ignore: deprecated_member_use
   var items = <Item>[];
 
   HomePage({super.key}) {
     items = [];
-    items.add(Item(title: "Item 1", done: false));
-    items.add(Item(title: "Item 2", done: false));
     items.add(Item(title: "Item 3", done: false));
+    items.add(Item(title: "Item 2", done: false));
+    items.add(Item(title: "Item 1", done: false));
+    items.add(Item(title: "Item 4", done: false));
   }
 
   @override
@@ -41,10 +43,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text("Todo list"),
       ),
-      body: Container(
-        child: const Center(
-          child: Text("Olá mundo"),
-        ),
+      body: ListView.builder(
+        itemCount: widget.items.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Text(widget.items[index].title.toString());
+        },
       ),
     );
   }
